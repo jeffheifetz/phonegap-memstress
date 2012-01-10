@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+  <head>
+    <title>Browser Crasher</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA3Mj7X4bksmxeVmpRuObeGR6_iDXLDuMA&sensor=false">
+</script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markermanager/1.0/src/markermanager.js"></script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js"></script>
+    <script type="text/javascript" src="http://gmaps-samples-v3.googlecode.com/svn/trunk/toomanymarkers/markers.js"></script>
+    <script type="text/javascript" src="http://gmaps-samples-v3.googlecode.com/svn/trunk/toomanymarkers/functions.js"></script>
+    <style type="text/css">
+    #map {
+      width: 900px;
+      height: 600px;
+    }
+    #controls {
+      margin: 0;
+      list-style: none;
+    }
+    #controls li {
+      display: inline;
+      margin-left: 42px;
+      font-family: Sans-Serif;
+      font-size: 10pt;
+    }
+    #fusion-hm-li {
+      visibility: hidden;
+      margin-left: 8px;
+    }
+    </style>
+    <script type="text/javascript">
+    var loadedDomos = [],
+        domoCount = 0;
+
+    function addDomo(){
+        var domoDiv = document.getElementById("domos"),
+            randomNum = Math.floor(Math.random()*5)+1,
+            image = new Image();
+            
+        while( loadedDomos[randomNum] && domoCount < 5 ){
+            randomNum = Math.floor(Math.random()*5)+1;
+        }
+        image.src="images/domo"+randomNum+".jpg";
+        loadedDomos[randomNum] = image;
+        domoCount++;
+        domoDiv.appendChild(image);
+    }
+    </script>
+  </head>
+  <body>
+    <div id="domos">
+    </div>
+    <ul id="controls">
+      <li>
+        <label for="mgr-cb">Marker Manager</label>
+        <input type="checkbox" id="mgr-cb" name="mgr-cb" />
+      </li>
+      <li>
+        <label for="mc-cb">Marker Clusterer</label>
+        <input type="checkbox" id="mc-cb" name="mc-cb" />
+      </li>
+      <li>
+        <label for="fusion-cb">Fusion Table Layer</label>
+        <input type="checkbox" id="fusion-cb" name="fusion-cb" />
+      </li>
+      <li id="fusion-hm-li">
+        <label for="fusion-hm-cb">with heatmap</label>
+        <input type="checkbox" id="fusion-hm-cb" name="fusion-hm-cb" />
+      </li>
+      <li>
+        <label for="kml-cb">KML Layer</label>
+        <input type="checkbox" id="kml-cb" name="kml-cb" />
+      </li>
+    </ul>
+    <button onclick="addDomo();">
+        Click to Add a Domo
+    </button>
+    <div id="map"></div>
+  </body>
+</html>
